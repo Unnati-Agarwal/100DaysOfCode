@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) 
+    {
+        vector<vector<int>>vp;
+        sort(intervals.begin(),intervals.end());
+        int p=intervals[0][0],q=intervals[0][1];
+        for(int i=1;i<intervals.size();i++)
+        {
+            if(q<intervals[i][0])
+            {
+                vp.push_back({p,q});
+                p=intervals[i][0];
+                q=intervals[i][1];
+            }
+            else
+            {
+                if(q<intervals[i][1])
+                    q=intervals[i][1];
+            }
+        }
+         vp.push_back({p,q});
+        return vp;
+    }
+};
