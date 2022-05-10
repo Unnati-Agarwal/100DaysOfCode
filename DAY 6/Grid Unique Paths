@@ -1,0 +1,24 @@
+#https://takeuforward.org/data-structure/grid-unique-paths-count-paths-from-left-top-to-the-right-bottom-of-a-matrix/
+
+class Solution {
+public:
+    int solve(int i,int j,int m,int n,vector<vector<int>>&vp)
+    {
+        if(i>=m or j>=n)
+            return 0;
+        
+        if(i==(m-1) and j==(n-1))
+            return 1;
+        
+        if(vp[i][j]!=-1)
+          return vp[i][j];
+        
+        return vp[i][j]=solve(i+1,j,m,n,vp)+solve(i,j+1,m,n,vp);
+    }
+    int uniquePaths(int m, int n) 
+    {
+        vector<vector<int>>vp(m+1,vector<int>(n+1,-1));
+        int ans=solve(0,0,m,n,vp);
+        return ans;
+    }
+};
