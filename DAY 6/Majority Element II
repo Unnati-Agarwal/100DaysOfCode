@@ -1,0 +1,20 @@
+# https://takeuforward.org/data-structure/majority-elementsn-3-times-find-the-elements-that-appears-more-than-n-3-times-in-the-array/
+
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) 
+    {
+        vector<int>v;
+        map<int,int>mp;
+        int n=nums.size();
+        for(int i=0;i<n;i++)
+            mp[nums[i]]++;
+        
+        for(auto &it:mp)
+        {
+            if(it.second>floor(n/3))
+                v.push_back(it.first);
+        }
+        return v;
+    }
+};
