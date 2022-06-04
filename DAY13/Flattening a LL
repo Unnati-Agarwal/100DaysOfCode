@@ -1,0 +1,35 @@
+#Given a Linked List of size N, where every node represents a sub-linked-list and contains two pointers:
+
+Node *flatten(Node *root)
+{
+   // Your code here
+   Node *temp=root,*ptr=root,*cur;
+   vector<int>vp;
+   Node *head=NULL;
+   while(temp!=NULL)
+   {
+       while(ptr!=NULL)
+       {
+           vp.push_back(ptr->data);
+           ptr=ptr->bottom;
+       }
+       temp=temp->next;
+       ptr=temp;
+   }
+   sort(vp.begin(),vp.end());
+   for(int i=0;i<vp.size();i++)
+   {
+       Node* p=new Node(vp[i]);
+       if(head==NULL)
+       {
+            head=p;
+            cur=head;
+       }
+       else
+       {
+           cur->bottom=p;
+           cur=cur->bottom;
+       }
+   }
+   return head;
+}
