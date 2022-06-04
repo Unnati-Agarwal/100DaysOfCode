@@ -1,0 +1,59 @@
+# Given the head of a singly linked list, return true if it is a palindrome.
+
+Method1
+string s="";
+while(head!=NULL)
+{
+    s+=to_string(head->val);
+    head=head->next;
+}
+string s1=s;
+reverse(s1.begin(),s1.end());
+if(s==s1)
+    return true;
+else
+    return false;
+    
+    
+Method2
+class Solution {
+public:
+    ListNode* rev(ListNode* head) 
+    {
+      ListNode *root =NULL;
+      while(head!=NULL)
+      {
+          ListNode *temp=new ListNode(head->val);
+          if(root==NULL)
+              root=temp;
+          else
+          {    
+             temp->next=root;
+             root=temp;
+          }
+          head=head->next;
+      }
+      return root;
+    }
+    bool isPalindrome(ListNode* head) 
+    {
+        
+        ListNode *slow=head,*fast=head;
+        while(fast->next and fast->next->next)
+        {
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        slow->next=rev(slow->next);
+        slow=slow->next;
+        while(slow!=NULL)
+        {
+            if(slow->val!=head->val)
+                return false;
+            
+            slow=slow->next;
+            head=head->next;
+        }
+        return true;
+    }
+};
