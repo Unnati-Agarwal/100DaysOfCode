@@ -1,0 +1,22 @@
+class Solution
+{
+public:
+    void subset(int n,vector<int>arr,int sum,vector<int>& v)
+    {
+        if(n==0)
+        {
+            v.push_back(sum);
+            return;
+        }
+        subset(n-1,arr,sum,v);
+        subset(n-1,arr,sum+arr[n-1],v);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        // Write Your Code here
+        int sum=0;
+        vector<int>v;
+        subset(N,arr,sum,v);
+        return v;
+    }
+};
