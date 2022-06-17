@@ -1,0 +1,27 @@
+class Solution {
+public:
+    void comb(int n,int k,vector<int>& candidates,vector<int>& v,vector<vector<int>>& vp)
+    {
+        if(n==candidates.size())
+        {
+            if(k==0)
+              vp.push_back(v);
+            return;
+        }
+        
+        if(candidates[n]<=k)
+        {
+            v.push_back(candidates[n]);
+            comb(n,k-candidates[n],candidates,v,vp);
+            v.pop_back();
+        }
+        comb(n+1,k,candidates,v,vp);
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) 
+    {
+        vector<vector<int>>vp;
+        vector<int>v;
+        comb(0,target,candidates,v,vp);
+        return vp;
+    }
+};
