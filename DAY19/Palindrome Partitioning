@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void palin(int i,string s,vector<vector<bool>>& vec,vector<string>& v,vector<vector<string>>& vp)
+    {
+        if(i>=s.length())
+        {
+            vp.push_back(v);
+            return;
+        }
+        for(int k=i;k<s.length();k++)
+        {
+            if(s[i]==s[k] and (k-i<=2 || vec[i+1][k-1]))
+            {
+                vec[i][k]=true;
+                v.push_back(s.substr(i,k-i+1));
+                palin(k+1,s,vec,v,vp);
+                v.pop_back();
+                    
+            }
+        }
+    }
+    
+    vector<vector<string>> partition(string s) 
+    {
+        int len=s.length();
+        vector<vector<bool>>vec(len,vector<bool>(len,false));
+        vector<vector<string>>vp;
+        vector<string>v;
+        palin(0,s,vec,v,vp);
+        return vp;
+    }
+};
