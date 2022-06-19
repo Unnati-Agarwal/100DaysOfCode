@@ -1,0 +1,54 @@
+#Solution 1
+
+class Solution {
+public:
+    string getPermutation(int n, int k) 
+    {
+        string s="";
+        int i;
+        for(i=1;i<=n;i++)
+            s+=to_string(i);
+        
+        //cout<<s<<endl;
+        
+        for(i=1;i<k;i++)
+        {
+            next_permutation(s.begin(),s.end());
+           // cout<<s<<endl;
+        }
+        
+    return s;
+    }
+};
+
+#Solution 2
+
+class Solution {
+public:
+    string getPermutation(int n, int k) 
+    {
+        int f=1;
+        vector<int>num;
+        for(int i=1;i<n;i++)
+        {
+            f=f*i;
+            num.push_back(i);
+        }
+        num.push_back(n);
+        string s="";
+        k--;
+        while(true)
+        {
+            s+=to_string(num[k/f]);
+            num.erase(num.begin()+k/f);
+            if(num.size()==0)
+                break;
+            
+            k=k%f;
+            f=f/num.size();
+        }
+        
+        
+       return s;
+    }
+};
