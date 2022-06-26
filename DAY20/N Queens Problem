@@ -1,0 +1,53 @@
+class Solution {
+public:
+    vector<vector<string>>vp;
+    bool queen(vector<string>& st,int k,int c,int n)
+    {
+        for(int i=0; i<c; i++)
+        {
+            if(st[k][i] == 'Q')
+                return false;
+        }
+        for(int i=k,j=c;i>=0 and j>=0;i--,j--)
+        {
+            if(st[i][j]=='Q')
+                return false;
+        }
+        for(int i=k,j=c;i<n and j>=0;i++,j--)
+        {
+            if(st[i][j]=='Q')
+                return false;
+        }
+        return true;
+    }
+    void solve(vector<string>st,int c,int n)
+    {
+        if(c==n)
+        {
+            vp.push_back(st);
+            return;
+        }
+        
+        for(int i=0;i<n;i++)
+        {
+            if(queen(st,i,c,n))
+            {
+                st[i][c]='Q';
+                solve(st,c+1,n);
+                st[i][c]='.';
+            }
+        }
+        return ;
+    }
+    
+    vector<vector<string>> solveNQueens(int n) 
+    {
+        vector<string>st;
+        string s(n,'.');
+        for(int i=0;i<n;i++)
+            st.push_back(s);
+        
+        solve(st,0,n);
+        return vp;
+    }
+};
