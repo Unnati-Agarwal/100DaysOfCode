@@ -1,0 +1,38 @@
+void words(string &s,int x,vector<string> &dictionary,string &str, vector<string> &ans)
+{
+    if(x==s.length())
+    {
+        ans.push_back(str);
+        return;
+    }
+    for(int i=x;i<s.length();i++)
+    {
+        string t=s.substr(x,i-x+1);
+        int f=0;
+        for(int j=0;j<dictionary.size();j++)
+        {
+            if(dictionary[j]==t)
+            {
+                f=1;
+                break;
+            }
+        }
+        if(f==1)
+        {
+            string s1=str;
+            str+=t+" ";
+            words(s,i+1,dictionary,str,ans);
+            str=s1;  
+        }
+    }
+}
+
+
+vector<string> wordBreak(string &s, vector<string> &dictionary)
+{
+    // Write your code here
+    vector<string>ans;
+    string str="";
+    words(s,0,dictionary,str,ans);
+    return ans;
+}
